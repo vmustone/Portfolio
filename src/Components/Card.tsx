@@ -19,8 +19,8 @@ const Card = ({ title, image, showTitle, onClick }: CardProps) => {
 
       <motion.div
         className="absolute inset-0 bg-black/40 flex items-center justify-center"
-        initial={{ opacity: 1 }}
-        animate={{ opacity: showTitle ? 1 : 0 }}
+        initial={{ opacity: showTitle ? 1 : 0 }} // Synkronoi initial-arvo showTitle:n kanssa
+        animate={{ opacity: showTitle ? 1 : 0 }} // Animaatio perustuu showTitle-arvoon
         whileHover={{ opacity: 1}}
         transition={{ duration: 0.5 }}
       >

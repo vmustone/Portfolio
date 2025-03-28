@@ -46,7 +46,7 @@ const ExpandedCard = ({ title, image, onClose }: ExpandedCardProps) => {
           {/* Sulkurasti (oikeassa yläkulmassa) */}
           <button
             onClick={onClose}
-            className="absolute top-2 right-2 text-white text-3xl font-bold bg-black/50 rounded-full px-3 py-1 hover:bg-black/80 transition"
+            className="absolute top-2 right-2 text-white text-2xl font-bold bg-black/50 rounded-full px-2.5 py-1 hover:bg-black/80 transition"
           >
             ✕
           </button>

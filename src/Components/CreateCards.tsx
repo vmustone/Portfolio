@@ -14,7 +14,7 @@ const CreateCards = () => {
   const [showTitle, setShowTitle] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowTitle(false), 2200); // Näyttää otsikon 3 sekuntia
+    const timer = setTimeout(() => setShowTitle(false), 2200);
     return () => clearTimeout(timer);
   }, []);
 
