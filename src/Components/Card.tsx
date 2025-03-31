@@ -31,3 +31,4 @@ const Card = ({ title, image, showTitle, onClick }: CardProps) => {
 };
 
 export default Card;
+

@@ -43,21 +43,24 @@ const ContactForm = () => {
     >
       <Form className="flex flex-col text-white rounded-lg absolute">
         <label className="font-semibold text-white">Name:</label>
-        <ErrorMessage name="name" component="p" className="text-red-500" />
-        <Field name="name" type="text" className="bg-black/50 border p-2 rounded" />
+        <ErrorMessage name="name" component="p" className="font-semibold text-red-500" />
+        <Field name="name" type="text" className="bg-black/30 border border-black p-2 rounded" />
 
         <label className="font-semibold text-white">Email:</label>
-        <ErrorMessage name="email" component="p" className="text-red-500" />
-        <Field name="email" type="email" className="bg-black/50 border p-2 rounded" />
+        <ErrorMessage name="email" component="p" className="font-semibold text-red-500" />
+        <Field name="email" type="email" className="bg-black/30 border border-black p-2 rounded" />
 
         <label className="font-semibold text-white">Subject:</label>
-        <Field name="subject" type="text" className="bg-black/50 border p-2 rounded" />
+        <Field name="subject" type="text" className="bg-black/30 border border-black p-2 rounded" />
 
         <label className="font-semibold text-white">Message:</label>
-        <ErrorMessage name="message" component="p" className="text-red-500" />
-        <Field as="textarea" name="message" className="bg-black/50 border rounded h-30 w-100" />
+        <ErrorMessage name="message" component="p" className="font-semibold text-red-500" />
+        <Field as="textarea" name="message" className="bg-black/30 border border-black rounded h-30 w-100" />
 
-        <button type="submit" className="bg-black text-white p-2 rounded hover:bg-black-600">
+        <button
+          type="submit"
+          className="font-semibold bg-black/30 text-white p-2 rounded border border-black hover:bg-black/85 transition mt-4"
+        >
           Send
         </button>
         {status && <p>{status}</p>}

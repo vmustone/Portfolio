@@ -29,7 +29,7 @@ const CreateCards = () => {
     <div className="flex justify-center items-center min-h-screen">
       {/* Näytetään kortit, jos ei ole avattua korttia */}
       {!expandedCard && (
-        <div className="flex justify-center gap-6 p-8">
+        <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6 p-8">
           {cards.map((card) => (
             <Card
               key={card.title}
@@ -41,7 +41,7 @@ const CreateCards = () => {
           ))}
         </div>
       )}
-
+  
       {/* Näytetään avattu kortti */}
       <AnimatePresence>
         {expandedCard && (
