@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useEffect } from "react";
 import AboutMe from "./Aboutme";
 import ContactForm from "./Contact";
+import Projects from "./Projects";
 
 interface ExpandedCardProps {
   title: string;
@@ -10,52 +11,58 @@ interface ExpandedCardProps {
 }
 
 const ExpandedCard = ({ title, image, onClose }: ExpandedCardProps) => {
-  // Kuuntelee Escape-näppäimen painamista
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        onClose();  // Sulkee kortin, kun Escape-näppäintä painetaan
+        onClose();
       }
     };
 
-    // Lisää tapahtumakuuntelija
     document.addEventListener("keydown", handleKeyDown);
 
-    // Poistaa tapahtumakuuntelijan komponentin poistumisen yhteydessä
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [onClose]);  // Varmistaa, että efekti päivitetään, jos onClose muuttuu
+  }, [onClose]);
 
   return (
-      <motion.div
-        className="fixed inset-0 flex items-center justify-center z-50 bg-black/50"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.15 } }}
+  <motion.div
+    className="fixed inset-0 flex items-center justify-center z-50 bg-black/50"
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{ opacity: 1, scale: 1 }}
+    exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.15 } }}
+  >
+    <div className="relative flex flex-col items-center">
+      <img
+        src={image}
+        alt={title}
+        className="max-w-[70vw] max-h-[70vh] object-cover rounded-lg shadow-2xl"
+      />
+      <button
+        onClick={onClose}
+        className="absolute top-2 right-2 text-white text-2xl font-bold bg-black/50 rounded-full px-2.5 py-1 hover:bg-black/80 transition z-10"
       >
-        {/* Kuva ja sulkurasti yhdessä */}
-        <div className="relative">
-          {/* Kuva */}
-          <img
-            src={image}
-            alt={title}
-            className="max-w-[70vw] max-h-[70vh] object-cover rounded-lg shadow-2xl"
-          />
-
-          {/* Sulkurasti (oikeassa yläkulmassa) */}
-          <button
-            onClick={onClose}
-            className="absolute top-2 right-2 text-white text-2xl font-bold bg-black/50 rounded-full px-2.5 py-1 hover:bg-black/80 transition"
-          >
-            ✕
-          </button>
+        ✕
+      </button>
+      {title === "Contact" && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="p-8 rounded-lg max-w-[90%] w-[90%] md:max-w-md md:w-full">
+            <ContactForm />
+          </div>
         </div>
-
-        {/* Dynaaminen sisältö */}
-        {title === "About" && <AboutMe />}
-        {title === "Contact" && <ContactForm />}
-      </motion.div>
+      )}
+      {title === "About Me" && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <AboutMe />
+        </div>
+      )}
+      {title === "Projects" && (
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Projects />
+        </div>
+      )}
+    </div>
+  </motion.div>
   );
 };
 

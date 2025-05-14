@@ -13,8 +13,6 @@ const ContactForm = () => {
   });
 
   const handleSubmit = (values: { name: string; email: string; subject: string; message: string }, { resetForm }: any) => {
-    console.log('values', values); // Debugging: tarkista, mitä arvoja lähetetään
-    console.log('status', status); // Debugging: tarkista status
     emailjs
       .send(
         import.meta.env.VITE_REACT_APP_EMAILJS_SERVICE_ID,
@@ -26,7 +24,7 @@ const ContactForm = () => {
         (response) => {
           console.log("SUCCESS!", response.status, response.text);
           setStatus("Email sent successfully!");
-          resetForm(); // Tyhjennä lomake
+          resetForm();
         },
         (error) => {
           console.error("FAILED...", error);
@@ -41,21 +39,21 @@ const ContactForm = () => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      <Form className="flex flex-col text-white rounded-lg absolute">
+      <Form className="flex flex-col text-white rounded-lg w-full h-full max-h-full overflow-auto">
         <label className="font-semibold text-white">Name:</label>
         <ErrorMessage name="name" component="p" className="font-semibold text-red-500" />
-        <Field name="name" type="text" className="bg-black/30 border border-black p-2 rounded" />
+        <Field name="name" type="text" className="bg-black/30 border border-black p-1 rounded" />
 
         <label className="font-semibold text-white">Email:</label>
         <ErrorMessage name="email" component="p" className="font-semibold text-red-500" />
-        <Field name="email" type="email" className="bg-black/30 border border-black p-2 rounded" />
+        <Field name="email" type="email" className="bg-black/30 border border-black p-1 rounded" />
 
         <label className="font-semibold text-white">Subject:</label>
-        <Field name="subject" type="text" className="bg-black/30 border border-black p-2 rounded" />
+        <Field name="subject" type="text" className="bg-black/30 border border-black p-1 rounded" />
 
         <label className="font-semibold text-white">Message:</label>
         <ErrorMessage name="message" component="p" className="font-semibold text-red-500" />
-        <Field as="textarea" name="message" className="bg-black/30 border border-black rounded h-30 w-100" />
+        <Field as="textarea" name="message" className="bg-black/30 border border-black rounded h-60 resize-none" />
 
         <button
           type="submit"
