@@ -1,24 +1,31 @@
 import { useState, useEffect } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "motion/react";
 import Card from "./Card";
 import ExpandedCard from "./ExpandedCard";
 
 const cards = [
-  { title: "About Me", image: "./src/Assets/Images/Cards/vmustone.jpg" },
-  { title: "Projects", image: "./src/Assets/Images/Cards/fsboard.jpg" },
-  { title: "Contact", image: "./src/Assets/Images/Cards/cripler.jpg" },
+  { title: "About Me", image: "./src/Assets/Images/Cards/vmustone.jpg", photoGrapher: "Photo by Diego James" },
+  { title: "Projects", image: "./src/Assets/Images/Cards/fsboard.jpg", photoGrapher: "Photo by Ville Vappula" },
+  { title: "Contact", image: "./src/Assets/Images/Cards/cripler.jpg", photoGrapher: "Photo by Mikko Kempas" },
 ];
 
-const CreateCards = () => {
-  const [expandedCard, setExpandedCard] = useState<string | null>(null);
+const CreateCards = (
+  { expandedCard, setExpandedCard }: {
+    expandedCard: string | null;
+    setExpandedCard: (title: string | null) => void;
+  }
+) => {
   const [showTitle, setShowTitle] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowTitle(false), 2200);
+    if (window.innerWidth <= 768) {
+      setShowTitle(true);
+     } else {
+    const timer = setTimeout(() => setShowTitle(false), 2500);
     return () => clearTimeout(timer);
-  }, []);
+  }
+}, []);
 
-  // Sulje kortti
   const handleClose = () => setExpandedCard(null);
   
   const handleOpen = (title: string) => {
@@ -26,8 +33,7 @@ const CreateCards = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      {/* Näytetään kortit, jos ei ole avattua korttia */}
+    <div className="flex justify-center">
       {!expandedCard && (
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 gap-6 p-8">
           {cards.map((card) => (
@@ -36,19 +42,17 @@ const CreateCards = () => {
               title={card.title}
               image={card.image}
               showTitle={showTitle}
-              onClick={() => handleOpen(card.title)} // Avaa kortti
+              onClick={() => handleOpen(card.title)}
             />
           ))}
         </div>
       )}
   
-      {/* Näytetään avattu kortti */}
       <AnimatePresence>
         {expandedCard && (
           <ExpandedCard
-            title={expandedCard} // Käytetään expandedCard arvona
-            image={cards.find((c) => c.title === expandedCard)!.image}
-            onClose={handleClose} // Lisää sulkemistoiminto
+            card={cards.find((c) => c.title === expandedCard)!}
+            onClose={handleClose}
           />
         )}
       </AnimatePresence>

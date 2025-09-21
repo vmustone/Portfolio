@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 interface CardProps {
   title: string;
@@ -19,8 +19,8 @@ const Card = ({ title, image, showTitle, onClick }: CardProps) => {
 
       <motion.div
         className="absolute inset-0 bg-black/40 flex items-center justify-center"
-        initial={{ opacity: showTitle ? 1 : 0 }} // Synkronoi initial-arvo showTitle:n kanssa
-        animate={{ opacity: showTitle ? 1 : 0 }} // Animaatio perustuu showTitle-arvoon
+        initial={{ opacity: showTitle ? 1 : 0 }}
+        animate={{ opacity: showTitle ? 1 : 0 }}
         whileHover={{ opacity: 1}}
         transition={{ duration: 0.5 }}
       >
