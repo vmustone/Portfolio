@@ -27,12 +27,10 @@ const ContactForm = () => {
       )
       .then(
         (response) => {
-          console.log("SUCCESS!", response.status, response.text);
           setStatus("✅ Email sent successfully!");
           resetForm();
         },
         (error) => {
-          console.error("FAILED...", error);
           setStatus("❌ Failed to send email. Please try again.");
         }
       )
