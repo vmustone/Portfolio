@@ -4,9 +4,9 @@ import Card from "./Card";
 import ExpandedCard from "./ExpandedCard";
 
 const cards = [
-  { title: "About Me", image: "./public/Assets/Images/vmustone.jpg", photoGrapher: "Photo by Diego James" },
-  { title: "Projects", image: "./public/Assets/Images/fsboard.jpg", photoGrapher: "Photo by Ville Vappula" },
-  { title: "Contact", image: "./public/Assets/Images/cripler.jpg", photoGrapher: "Photo by Mikko Kempas" },
+  { title: "About Me", image: "/Assets/Images/vmustone.jpg", photoGrapher: "Photo by Diego James" },
+  { title: "Projects", image: "/Assets/Images/fsboard.jpg", photoGrapher: "Photo by Ville Vappula" },
+  { title: "Contact", image: "/Assets/Images/cripler.jpg", photoGrapher: "Photo by Mikko Kempas" },
 ];
 
 const CreateCards = (
