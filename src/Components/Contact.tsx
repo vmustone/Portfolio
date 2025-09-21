@@ -1,5 +1,5 @@
 import { Formik, Form, Field } from "formik";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 import { useState, useEffect } from "react";
 
 const ContactForm = () => {
@@ -14,29 +14,24 @@ const ContactForm = () => {
     }
   }, [status]);
 
-  const handleSubmit = (values: { name: string; email: string; subject: string; message: string }, { resetForm, setSubmitting }: any) => {
+  const handleSubmit = async (values: { name: string; email: string; subject: string; message: string }, { resetForm, setSubmitting }: any) => {
     setSubmitting(true);
     setStatus("");
     
-    emailjs
-      .send(
+    try {
+      await emailjs.send(
         import.meta.env.VITE_REACT_APP_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_REACT_APP_EMAILJS_TEMPLATE_ID,
         values,
         import.meta.env.VITE_REACT_APP_EMAILJS_PUBLIC_KEY
-      )
-      .then(
-        (response) => {
-          setStatus("✅ Email sent successfully!");
-          resetForm();
-        },
-        (error) => {
-          setStatus("❌ Failed to send email. Please try again.");
-        }
-      )
-      .finally(() => {
-        setSubmitting(false);
-      });
+      );
+      setStatus("✅ Email sent successfully!");
+      resetForm();
+    } catch {
+      setStatus("❌ Failed to send email. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
